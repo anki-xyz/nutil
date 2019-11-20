@@ -13,10 +13,17 @@ Fast image browsing based on PIL and IPython display.
 Usage:
 
     import numpy as np
-    from nutil import browse
+    from nutil.image import browse
 
     x = np.random.randint(0, 255, (10, 200, 200))
 
     browse(x, cmap='viridis')
 
 ![Browse through random stack](browse_example.gif)
+
+## Fake data
+
+Moving square
+
+    from nutil.fake import movingSquare
+    ms = movingSquare()
