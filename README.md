@@ -2,6 +2,10 @@
 
 Lazy functions for Jupyter notebooks
 
+Installing:
+
+    pip install git+https://github.com/anki-xyz/nutil
+
 ## Browsing
 
 Fast image browsing based on PIL and IPython display.
