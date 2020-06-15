@@ -6,3 +6,4 @@ NUtil.egg-info/SOURCES.txt
 NUtil.egg-info/top_level.txt
 nutil/__pycache__/__init__.cpython-36.pyc
 nutil/__pycache__/image.cpython-36.pyc
+nutil/__pycache__/plot.cpython-36.pyc
