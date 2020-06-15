@@ -57,7 +57,11 @@ def browse(x, axis=0, resize=None, enhance_contrast=True, antialiasing=False, cu
     warning
         when float arrays are shown
     """
-    s = x.shape
+    if type(x) == list:
+        s = (len(x), )+x[0].shape
+
+    else:
+        s = x.shape
     
     assert type(axis) == int, "axis must be an interger"
     assert len(s) >= 2, "image must be at least 2D"
@@ -87,6 +91,7 @@ def browse(x, axis=0, resize=None, enhance_contrast=True, antialiasing=False, cu
     def __(a:(0, s[axis]-1)):
         # Dynamic fancy indexing using axis as argument
         im = np.take(x, a, axis)
+        already_resized = False
         
         # If data should be shown in a specific range
         if cutoff_min or cutoff_max:
@@ -106,12 +111,20 @@ def browse(x, axis=0, resize=None, enhance_contrast=True, antialiasing=False, cu
         # If grayscale image should be colored using a LUT
         if cmap and len(im.shape) == 2:
             im = _colorim(im, colors)
+
+        # If image should be smaller,
+        # and we just can take every nth point,
+        # do this instead of expensive resizing
+        if resize is not None:
+            if 1/resize % 2 == 0:
+                im = im[::int(1/resize), ::int(1/resize)]
+                already_resized = True
         
         # Convert numpy array to PIL Image
         im_pil = Image.fromarray(im)
         
         # If image is too small and people asked for resizing
-        if resize is not None:
+        if resize is not None and not already_resized:
             w, h = im.shape[:2]
             im_pil = im_pil.resize((int(h*resize), 
                                     int(w*resize)), RESIZE_FLAG)

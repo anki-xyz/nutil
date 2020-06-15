@@ -10,3 +10,4 @@ def movingSquare(steps=10, shape=(200,200), factor=3):
         w+i*factor:2*w+i*factor] = 1
 
     return x
+
