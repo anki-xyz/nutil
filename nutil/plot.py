@@ -133,3 +133,38 @@ def darkSequential(target_color=(255, 165, 2), steps=256, reverse=False):
         colors[i-1, :3] = tc.rgb
 
     return ListedColormap(colors[::-1] if reverse else colors)
+
+
+def colorImage(im, cmap, vmin=None, vmax=None):
+    """Color image using a cmap
+
+    Args:
+        im (np.ndarray): Image that should be colored
+        cmap (Matplotlib Colormap): Colormap that should be applied
+        vmin (int, optional): Lower clipping value. Defaults to None.
+        vmax (int, optional): Higher clipping value. Defaults to None.
+
+    Returns:
+        np.ndarray, RGB image (uint8)
+    """
+    rgb = np.zeros(im.shape+(3,), dtype=np.uint8)
+
+    im_min = im.min() if vmin is None else vmin
+    im_max = im.max() if vmax is None else vmax
+
+    for y in range(rgb.shape[0]):
+        for x in range(rgb.shape[1]):
+            v = (im[y,x] - im_min) / (im_max - im_min)
+            c = cmap(v)
+            rgb[y, x] = np.asarray(c[:3])*255
+            
+    return rgb
+
+if __name__ == '__main__':
+    im = np.random.randint(0, 200, (200, 200), dtype=np.uint8)
+    cmap = plt.get_cmap('viridis')
+    rgb = colorImage(im, cmap, 10)
+    print(rgb.shape)
+
+    plt.imshow(rgb)
+    plt.show()
