@@ -48,18 +48,53 @@ Checkout the [example file](nice_figure.svg) in SVG file format.
     # Font-size 8 pt by default,
     # text editable
     # and seaborn white style with ticks
-    paperStyle()
-    
-    plt.figure(figsize=(3,2))
-    plt.plot(np.random.randn(100))
-    plt.xlabel("Time [au]")
-    plt.ylabel("Data [au]")
-    sns.despine(trim=True, offset=5)
-    plt.savefig("nice_figure.png")
-    plt.savefig("nice_figure.svg")
+    with paperStyle():
+        plt.figure(figsize=(3,2))
+        plt.plot(np.random.randn(100))
+        plt.xlabel("Time [au]")
+        plt.ylabel("Data [au]")
+        sns.despine(trim=True, offset=5)
+        plt.savefig("nice_figure.png")
+        plt.savefig("nice_figure.svg")
 
 
 ![Random plot as nice figure](nice_figure.png)
+
+All default sequential colormaps in matplotlib are from white-ish to another color.
+With the following code you may create your own dark or light-sequential colormaps:
+
+    from nutil.plot import darkSequential, lightSequential
+
+    im = np.random.randint(0, 255, (10,10))
+
+    plt.figure()
+
+    plt.subplot(2,2,1)
+    plt.imshow(im, cmap=lightSequential('#e00',
+                                        steps=5,
+                                        reverse=True))
+    plt.colorbar()
+    plt.axis('off')
+
+    plt.subplot(2,2,2)
+    plt.imshow(im, cmap=lightSequential((0, 124, 241)))
+    plt.colorbar()
+    plt.axis('off')
+
+    plt.subplot(2,2,3)
+    plt.imshow(im, cmap=darkSequential('#e00',
+                                        steps=5))
+    plt.colorbar()
+    plt.axis('off')
+
+    plt.subplot(2,2,4)
+    plt.imshow(im, cmap=darkSequential((0, 124, 241)))
+    plt.colorbar()
+    plt.axis('off')
+
+    plt.savefig("custom_colormaps.png")
+
+![Different custom colormaps](nice_figure.png)
 
 ## Fake data
 
