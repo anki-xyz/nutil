@@ -94,7 +94,7 @@ With the following code you may create your own dark or light-sequential colorma
 
     plt.savefig("custom_colormaps.png")
 
-![Different custom colormaps](nice_figure.png)
+![Different custom colormaps](custom_colormaps.png)
 
 ## Fake data
 
