@@ -5,7 +5,7 @@ import seaborn as sns
 from matplotlib.colors import ListedColormap
 import colour
 
-def paperStyle(font_size=8, use_seaborn=True, temporary=True):
+def paperStyle(font_size=8, use_seaborn=True, temporary=True, ticks='out'):
     """Defines plot styles for paper
 
     Args:
@@ -24,6 +24,8 @@ def paperStyle(font_size=8, use_seaborn=True, temporary=True):
             'ytick.labelsize': font_size,
             'legend.fontsize': font_size,
             'axes.titlesize': font_size,
+            'xtick.direction': ticks,
+            'ytick.direction': ticks,
             'font.family': ['sans-serif'],
             'font.sans-serif': ['Arial'],
             'svg.fonttype': 'none',
@@ -39,6 +41,8 @@ def paperStyle(font_size=8, use_seaborn=True, temporary=True):
         plt.rcParams['axes.titlesize'] = font_size
         plt.rcParams['font.family'] = ['sans-serif']
         plt.rcParams['font.sans-serif'] = ['Arial']
+        plt.rcParams['xtick.direction'] = ticks
+        plt.rcParams['ytick.direction'] = ticks
         plt.rcParams['svg.fonttype'] = 'none' # Text is not rendered
         plt.rcParams['pdf.fonttype'] = 42 # TrueType to avoid PDF issues
     
