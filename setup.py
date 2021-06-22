@@ -6,4 +6,4 @@ setup(name='NUtil',
       author='Andreas Kist',
       author_email='me@anki.xyz',
       packages=find_packages(),
-      install_requires=['numpy', 'Pillow', 'numba', 'matplotlib', 'colour'])
+      install_requires=['numpy', 'Pillow', 'numba', 'matplotlib', 'colour', 'seaborn'])
